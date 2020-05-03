@@ -19,6 +19,14 @@ class NoteRepo private constructor(private val noteDao: NoteDao)
         noteDao.deleteNotes()
     }
 
+    suspend fun updateNote(note:Note){
+        noteDao.updateNote(note)
+    }
+
+    suspend fun getNoteById(id:Long):Note{
+        return noteDao.getNoteById(id)
+    }
+
     companion object{
         private var INSTANCE:NoteRepo? = null
         fun getInstance(noteDao: NoteDao):NoteRepo{

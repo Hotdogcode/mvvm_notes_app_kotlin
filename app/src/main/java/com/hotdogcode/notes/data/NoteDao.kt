@@ -1,9 +1,6 @@
 package com.hotdogcode.notes.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.hotdogcode.notes.data.model.Note
 
 @Dao
@@ -19,4 +16,10 @@ interface NoteDao {
 
     @Query("DELETE FROM tbl_notes")
     suspend fun deleteNotes()
+
+    @Update
+    suspend fun updateNote(note:Note)
+
+    @Query("SELECT * FROM tbl_notes WHERE id= :id")
+    suspend fun getNoteById(id:Long):Note
 }

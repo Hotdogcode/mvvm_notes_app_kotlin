@@ -8,6 +8,6 @@ import com.hotdogcode.notes.data.model.Note
 
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, data: MutableLiveData<List<Note>>) {
-    val adapter = NoteAdapter(data.value?: mutableListOf(), view.context)
-    view.adapter = adapter
+//    val adapter = NoteAdapter(data.value?: mutableListOf(), view.context)
+//    view.adapter = adapter
 }

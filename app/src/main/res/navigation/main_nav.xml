@@ -11,10 +11,22 @@
         <action
             android:id="@+id/action_homeFragment_to_newNoteFragment"
             app:destination="@id/newNoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/newNoteFragment"
         android:name="com.hotdogcode.notes.view.fragments.newNoteFragment.NewNoteFragment"
         android:label="fragment_new_note"
         tools:layout="@layout/fragment_new_note" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.hotdogcode.notes.view.fragments.editNoteFragment.EditNoteFragment"
+        android:label="EditNoteFragment" >
+        <argument
+            android:name="noteId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 </navigation>

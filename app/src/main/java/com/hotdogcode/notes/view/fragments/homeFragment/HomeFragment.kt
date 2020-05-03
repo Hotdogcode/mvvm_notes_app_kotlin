@@ -11,9 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hotdogcode.notes.OnNoteClickListener
 
 import com.hotdogcode.notes.R
 import com.hotdogcode.notes.adapters.NoteAdapter
+import com.hotdogcode.notes.data.model.Note
 import com.hotdogcode.notes.databinding.FragmentHomeBinding
 import com.hotdogcode.notes.utilities.Injector
 import com.hotdogcode.notes.utilities.ViewModelFactory
@@ -21,7 +23,7 @@ import com.hotdogcode.notes.utilities.ViewModelFactory
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),OnNoteClickListener {
 
 
     lateinit var viewModel : HomeFragmentViewModel
@@ -75,7 +77,7 @@ class HomeFragment : Fragment() {
 
 
         viewModel.notes.observe(this, Observer {
-            binding.recyclerView.adapter = NoteAdapter(it,context!!)
+            binding.recyclerView.adapter = NoteAdapter(it,context!!,this)
         })
 
         viewModel.getNotesList()
@@ -83,4 +85,7 @@ class HomeFragment : Fragment() {
     }
 
 
+    override fun onNoteClicked(note: Note) {
+        viewModel.editNoteClick(this,note.id)
+    }
 }
