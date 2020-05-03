@@ -3,10 +3,9 @@ package com.hotdogcode.notes.view.fragments.homeFragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,15 +25,17 @@ class HomeFragment : Fragment() {
 
 
     lateinit var viewModel : HomeFragmentViewModel
+    lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         init()
-        val binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+        binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
         binding.viewModel = viewModel
         val layoutManager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = layoutManager
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -48,6 +49,21 @@ class HomeFragment : Fragment() {
         Log.e("aslam","OnResume")
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.delete -> {
+                viewModel.deleteAll()
+                Toast.makeText(context,"Cleared All",Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     fun init(){
 
 
@@ -59,7 +75,7 @@ class HomeFragment : Fragment() {
 
 
         viewModel.notes.observe(this, Observer {
-            Log.e("aslam","List Updated")
+            binding.recyclerView.adapter = NoteAdapter(it,context!!)
         })
 
         viewModel.getNotesList()

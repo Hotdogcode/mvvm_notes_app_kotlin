@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.hotdogcode.notes.R
 import com.hotdogcode.notes.data.NoteRepo
 import com.hotdogcode.notes.data.model.Note
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(private val noteRepo: NoteRepo):ViewModel() {
@@ -19,6 +20,14 @@ class HomeFragmentViewModel(private val noteRepo: NoteRepo):ViewModel() {
         viewModelScope.launch {
             notes.value = noteRepo.getNotes()
             count.value = notes.value!!.size
+        }
+    }
+
+    fun deleteAll(){
+        notes.value = emptyList<Note>()
+        count.value = 0
+        viewModelScope.launch {
+            noteRepo.deleteNotes()
         }
     }
 
