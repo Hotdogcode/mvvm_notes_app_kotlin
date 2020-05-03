@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.hotdogcode.notes.R
+import com.hotdogcode.notes.adapters.NoteAdapter
 import com.hotdogcode.notes.databinding.FragmentHomeBinding
 import com.hotdogcode.notes.utilities.Injector
 import com.hotdogcode.notes.utilities.ViewModelFactory
@@ -42,6 +43,11 @@ class HomeFragment : Fragment() {
         init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("aslam","OnResume")
+    }
+
     fun init(){
 
 
@@ -53,7 +59,7 @@ class HomeFragment : Fragment() {
 
 
         viewModel.notes.observe(this, Observer {
-
+            Log.e("aslam","List Updated")
         })
 
         viewModel.getNotesList()

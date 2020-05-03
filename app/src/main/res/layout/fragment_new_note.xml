@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hotdogcode.notes.view.fragments.newNoteFragment.NewNoteViewModel" />
+    </data>
+
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:ems="10"
+            android:text="@={viewModel.title}"
             android:inputType="textPersonName"
             android:hint="Title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
+            android:text="@={viewModel.subTitle}"
             android:gravity="start|top"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Create"
+            android:onClick="@{()->viewModel.add()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.693"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:onClick="@{()->viewModel.cancel()}"
             app:layout_constraintEnd_toStartOf="@+id/add"
             app:layout_constraintHorizontal_bias="0.727"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,3 +69,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
+</layout>
