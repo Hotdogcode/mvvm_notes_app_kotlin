@@ -16,7 +16,6 @@ class SplashViewModel(private val noteRepo: NoteRepo)  : ViewModel(){
     fun incCounter(i:Long){
         viewModelScope.launch {
             delay(i*1000)
-            noteRepo.insertNote(Note(0,"Title","SubTitle"))
             _counter.value = i.toInt()
         }
 

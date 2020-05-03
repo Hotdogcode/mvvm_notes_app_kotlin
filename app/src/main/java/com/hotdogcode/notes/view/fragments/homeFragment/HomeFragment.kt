@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.hotdogcode.notes.R
 import com.hotdogcode.notes.databinding.FragmentHomeBinding
@@ -30,6 +32,8 @@ class HomeFragment : Fragment() {
         init()
         val binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
         binding.viewModel = viewModel
+        val layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.layoutManager = layoutManager
         return binding.root
     }
 
@@ -49,7 +53,7 @@ class HomeFragment : Fragment() {
 
 
         viewModel.notes.observe(this, Observer {
-            Log.e("data",it.size.toString())
+
         })
 
         viewModel.getNotesList()
